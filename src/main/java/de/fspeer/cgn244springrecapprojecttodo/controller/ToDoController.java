@@ -26,4 +26,21 @@ public class ToDoController {
     public ToDo createToDo(@RequestBody ToDoDTO toDoDTO){
         return toDoService.createToDo(toDoDTO);
     }
+
+    @GetMapping("/{id}")
+    public ToDo getDetailsToDoById(@PathVariable String id){
+        return toDoService.getDetailsToDoById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ToDo editToDo(@PathVariable String id, @RequestBody ToDo editedToDo){
+        return toDoService.editToDo(editedToDo);
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteToDo(@PathVariable String id){
+        return toDoService.deleteToDo(id);
+    }
+
+
 }

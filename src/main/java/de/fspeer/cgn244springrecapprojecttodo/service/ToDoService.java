@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestClient;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,5 +26,18 @@ public class ToDoService {
 
     public ToDo createToDo(ToDoDTO toDoDTO) {
         return toDoRepository.save(new ToDo(idService.generateId(), toDoDTO.description(), toDoDTO.status()));
+    }
+
+    public ToDo getDetailsToDoById(String id) {
+        return toDoRepository.findById(id).orElseThrow();
+    }
+
+    public ToDo editToDo(ToDo editedToDo) {
+        return toDoRepository.save(editedToDo);
+    }
+
+    public String deleteToDo(String id) {
+        toDoRepository.deleteById(id);
+        return "ToDo successfully deleted!";
     }
 }
